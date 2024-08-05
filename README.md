@@ -2,13 +2,13 @@
 
 ## Overview
 
-This project aims to create a weather data pipeline using Airflow, AWS Glue, and Redshift. The pipeline extracts weather data from the OpenWeather API, stores it in an S3 bucket, transforms the data using AWS Glue, and finally loads it into a Redshift cluster for analysis.
+This project aims to create a weather data pipeline using AWS services S3, Glue, Redshift and is orchestrated by Airflow. The pipeline extracts weather data from the OpenWeather API, stores it in an S3 bucket, transforms the data using AWS Glue, and finally loads it into a Redshift cluster for analysis.
 
 ## Project Structure
 
 - **DAGs**: Two Airflow DAGs are defined for the workflow.
-  - `weather_data_extraction_dag.py`: Extracts weather data from the OpenWeather API and stores it in an S3 bucket.
-  - `weather_data_transformation_dag.py`: Transforms the weather data using AWS Glue and loads it into a Redshift cluster.
+  - `openweather_api.py`: Extracts weather data from the OpenWeather API and stores it in an S3 bucket.
+  - `transform_redshift_load.py`: Transforms the weather data using AWS Glue and loads it into a Redshift cluster.
 
 ## Components
 
@@ -43,11 +43,3 @@ This project aims to create a weather data pipeline using Airflow, AWS Glue, and
 ## Conclusion
 
 This project demonstrates the integration of Airflow, AWS Glue, and Redshift to create a scalable and reliable weather data pipeline. It serves as a foundation for building more advanced data pipelines for various use cases.
-
-## Author
-
-Oliver Christopher Amirmansour
-
-## Contact
-
-For any questions or inquiries, please reach out to me at [Oliver.amirmansour@gmail.com](mailto:Oliver.amirmansour@gmail.com).
