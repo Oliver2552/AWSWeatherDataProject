@@ -1,51 +1,53 @@
-# AWSWeatherDataProject
+# Weather Data Pipeline Project
 
-## Project/Goals
+## Overview
 
-The aim of this project was to gather weather data for Toronto, Ontario, Canada from openweathermap.org, place it into an S3 bucket, transform it and finally place it in an environment where it can be queried. The goal was to only utilize AWS, particularly S3, Glue, Redshift and orchestrate it using MWAA (Airflow managed by AWS). 
+This project aims to create a weather data pipeline using Airflow, AWS Glue, and Redshift. The pipeline extracts weather data from the OpenWeather API, stores it in an S3 bucket, transforms the data using AWS Glue, and finally loads it into a Redshift cluster for analysis.
 
-More specifically, the project goals were:
-1. Extract weather data from openweathermap's API for Toronto, Ontario.
-2. Store this data in an AWS S3 bucket.
-3. Utilize AWS Glue to ETL/transform the data.
-4. Load it into AWS Redshift where querying can take place.
+## Project Structure
 
+- **DAGs**: Two Airflow DAGs are defined for the workflow.
+  - `weather_data_extraction_dag.py`: Extracts weather data from the OpenWeather API and stores it in an S3 bucket.
+  - `weather_data_transformation_dag.py`: Transforms the weather data using AWS Glue and loads it into a Redshift cluster.
 
-## Process
+## Components
 
-### Step 1: Data Extraction from OpenWeatherMap API
-Using the *requests* library, we made API requests to OpenWeatherMap to source weather data for Toronto. This can be seen in the "openweather_api.py" dag file in the "dags" folder (line 29)
+- **OpenWeather API**: Provides weather data for various locations.
+- **AWS S3**: Storage for raw and processed data.
+- **AWS Glue**: ETL service to transform the data.
+- **AWS Redshift**: Data warehouse to store and analyze the transformed data.
 
-### Step 2: Storing Data in AWS S3
-Once the data is extracted we utilize an S3CreateObjectOperator to structure the data into a dataframe and place it into an S3 bucket. This can also be seen in the "openweather_api.py" dag file in the "dags" folder (line 48).
+## Airflow Setup
 
-### Step 3: Data Processing and Analysis
-Using AWS Lambda and AWS Glue, we processed the weather data stored in S3. This step involved cleaning the data, handling missing values, and transforming it into a suitable format for analysis.
+1. **Create connections in Airflow**:
+   - **AWS Connection**: Add your AWS credentials in the Airflow UI.
+   - **Redshift Connection**: Add your Redshift cluster connection details.
 
-### Step 4: Exploratory Data Analysis (EDA)
-We performed an exploratory data analysis (EDA) to understand the underlying patterns and relationships within the weather data. This involved visualizing the data using AWS QuickSight to identify trends and anomalies.
+## AWS Setup
 
-### Step 5: Model Building and Predictive Analysis
-Using AWS SageMaker, we built a predictive model to forecast weather patterns. The model was trained on historical weather data and various weather metrics. We used multiple regression techniques to predict future weather conditions.
+1. **S3 Bucket**: Create an S3 bucket to store the weather data.
+2. **Glue Job**: Create an AWS Glue job to transform the weather data.
+3. **Redshift Cluster**: Set up a Redshift cluster to store the transformed data.
 
-### Step 6: Model Evaluation and Interpretation
-We evaluated the performance of our predictive model by assessing various metrics such as R-squared and Mean Absolute Error (MAE). The results were interpreted to understand the model's effectiveness and areas for improvement.
+## Running the Pipeline
 
-## Results
+1. **Trigger the Extraction DAG**: Run the `weather_data_extraction_dag` from the Airflow UI to extract data from the OpenWeather API and store it in S3.
+2. **Trigger the Transformation DAG**: Run the `weather_data_transformation_dag` from the Airflow UI to transform the data using AWS Glue and load it into Redshift.
 
-**Key findings:**
-- The model showed a strong positive correlation between temperature and humidity levels.
-- Wind speed was found to be a significant predictor of precipitation.
-- The final model achieved an R-squared of 0.85, indicating a high level of explained variability in the weather patterns.
+## Future Improvements
 
-## Challenges
+- **Data Quality Checks**: Implement data quality checks to ensure the accuracy and completeness of the data.
+- **Error Handling**: Enhance error handling and logging to capture and address issues during the pipeline execution.
+- **Scalability**: Optimize the pipeline to handle larger datasets and more complex transformations.
 
-- Integrating and automating the data extraction process from the weather API required careful handling of API rate limits and error responses.
-- Ensuring the scalability and performance of the data processing pipeline in AWS was critical to handle large volumes of weather data.
+## Conclusion
 
-## Future Goals
+This project demonstrates the integration of Airflow, AWS Glue, and Redshift to create a scalable and reliable weather data pipeline. It serves as a foundation for building more advanced data pipelines for various use cases.
 
-- Explore additional weather-related variables to improve the predictive power of the model.
-- Develop a real-time weather forecasting system using AWS Kinesis for streaming data.
-- Implement more sophisticated machine learning algorithms to enhance prediction accuracy.
-- Extend the project to include weather data from more diverse geographical locations to make the model more robust.
+## Author
+
+Oliver Christopher Amirmansour
+
+## Contact
+
+For any questions or inquiries, please reach out to me at [Oliver.amirmansour@gmail.com](mailto:Oliver.amirmansour@gmail.com).
