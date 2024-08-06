@@ -31,8 +31,8 @@ This project aims to create a weather data pipeline using AWS services S3, Glue,
 
 ## Running the Pipeline
 
-1. **Trigger the Extraction DAG**: Run the `weather_data_extraction_dag` from the Airflow UI to extract data from the OpenWeather API and store it in S3.
-2. **Trigger the Transformation DAG**: Run the `weather_data_transformation_dag` from the Airflow UI to transform the data using AWS Glue and load it into Redshift.
+1. **Trigger the Extraction DAG**: Run the `openweather_api` DAG from the Airflow UI to extract data from the OpenWeather API and store it in S3.
+2. **Trigger the Transformation DAG**: Run the `transform_redshift_load` DAG from the Airflow UI to transform the data using AWS Glue and load it into Redshift.
 
 ## Future Improvements
 
